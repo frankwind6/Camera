@@ -1,18 +1,19 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
     namespace 'com.fjk.camera'
-    compileSdk 33
+    compileSdk rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
         applicationId "com.fjk.camera"
-        minSdk 24
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk rootProject.ext.android.minSdkVersion
+        targetSdk rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,19 +41,46 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation rootProject.ext.deps["appcompat"]
+    implementation rootProject.ext.deps["core_ktx"]
+    implementation rootProject.ext.deps["constraintlayout"]
+    implementation rootProject.ext.deps["material"]
+    implementation rootProject.ext.deps["junit"]
+    implementation rootProject.ext.deps["test-junit"]
+    implementation rootProject.ext.deps["zxing"]
+//    implementation rootProject.ext.deps["autosize"]
+    implementation rootProject.ext.deps["navigation-fragment"]
+    implementation rootProject.ext.deps["navigation-ui"]
+//    implementation rootProject.ext.deps["h3c-dialog"]
 
 
-    implementation "androidx.camera:camera-core:1.1.0-alpha11"
-    implementation "androidx.camera:camera-camera2:1.1.0-alpha11"
-    implementation "androidx.camera:camera-lifecycle:1.1.0-alpha11"
-    implementation "androidx.camera:camera-view:1.0.0-alpha31"
-    implementation "androidx.camera:camera-extensions:1.0.0-alpha31"
+    // CameraX core library using the camera2 implementation
+    def camerax_version = "1.2.1"
+// The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+// If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+// If you want to additionally use the CameraX VideoCapture library
+    implementation "androidx.camera:camera-video:${camerax_version}"
+// If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:${camerax_version}"
+// If you want to additionally add CameraX ML Kit Vision Integration
+    implementation "androidx.camera:camera-mlkit-vision:1.2.0-beta02"
+// If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:${camerax_version}"
 
+    implementation 'com.github.NodeMedia:NodeMediaClient-Android:2.9.23'
+
+    //加入room数据库的依赖
+    implementation ("androidx.room:room-runtime:2.5.1")
+    annotationProcessor ("androidx.room:room-compiler:2.5.1")
+    implementation ("androidx.room:room-ktx:2.5.1")
+    kapt ("androidx.room:room-compiler:2.5.1")
+
+    //协程的依赖
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1")
+
+    //引入lifecycle的依赖
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
 }

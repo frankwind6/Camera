@@ -1,3 +1,23 @@
 <resources>
-    <string name="app_name">Camera</string>
+    <string name="app_name">H3CCamera</string>
+    <string name="add_net_camera">添加网络摄像头</string>
+    <string name="name">名称</string>
+    <string name="stream_address">流地址</string>
+    <string name="please_enter_web_camera_name">请输入摄像头名称</string>
+    <string name="please_enter_web_camera_address">请输入摄像头网络地址</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="delete">删除</string>
+    <string name="delete_camera">删除摄像头</string>
+    <string name="confirm_delete_camera">请确认是否删除该网络摄像头？</string>
+    <string name="new_net_camera">新的摄像头</string>
+    <string name="camera_not_connect">摄像头画面未接入</string>
+    <string name="edit">编辑</string>
+    <string name="using">使用中</string>
+    <string name="type">类型</string>
+    <string name="edit_net_camera">编辑网络摄像头</string>
+    <string name="add_net_camera_success">摄像头添加成功</string>
+    <string name="add_net_camera_failed">摄像头添加失败</string>
+    <string name="mode_take_photo">拍照模式</string>
+    <string name="mode_take_recode">录像模式</string>
 </resources>

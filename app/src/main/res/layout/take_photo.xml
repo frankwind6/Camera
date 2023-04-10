@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/universal_color_black_1a000000"
+    android:paddingTop="@dimen/s_dp_50"
+    android:paddingBottom="@dimen/s_dp_50"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <com.fjk.camera.widget.AppIconView
+        android:id="@+id/album"
+        android:layout_width="@dimen/s_dp_100"
+        android:layout_height="@dimen/s_dp_100"
+        android:layout_marginStart="@dimen/s_dp_200"
+        android:src="@mipmap/ic_album"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.fjk.camera.widget.AppIconView
+        android:id="@+id/img_capture"
+        android:layout_width="@dimen/s_dp_100"
+        android:layout_height="@dimen/s_dp_100"
+        android:src="@drawable/select_capture_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Spinner
+        android:id="@+id/mode_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="92dp"
+        android:spinnerMode="dropdown"
+        android:background="@color/green_FFE8FFEB"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

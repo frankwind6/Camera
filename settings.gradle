@@ -10,7 +10,17 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            allowInsecureProtocol true
+            credentials {
+                username "admin"
+                password "admin_nexus"
+                maven { url 'https://jitpack.io' }
+            }
+            url "http://10.214.20.42:8090/repository/maven-public/"
+        }
     }
 }
+
 rootProject.name = "Camera"
 include ':app'

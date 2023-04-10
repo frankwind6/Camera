@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/s_dp_360"
+        android:layout_height="@dimen/s_dp_228"
+        app:cardCornerRadius="@dimen/s_dp_8"
+        app:cardElevation="@dimen/s_dp_10"
+        app:cardMaxElevation="@dimen/s_dp_12"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/s_dp_24"
+                android:layout_marginTop="@dimen/s_dp_16"
+                android:text="@string/add_net_camera"
+                android:textColor="@color/black_FF131922"
+                android:textSize="@dimen/s_dp_18"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_close"
+                android:layout_width="@dimen/s_dp_24"
+                android:layout_height="@dimen/s_dp_24"
+                android:layout_marginTop="@dimen/s_dp_18"
+                android:layout_marginEnd="@dimen/s_dp_24"
+                android:src="@mipmap/ic_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/s_dp_1"
+                android:layout_marginTop="@dimen/s_dp_59"
+                android:background="@color/white_FFE7E7E7"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_item1_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/s_dp_38"
+                android:layout_marginTop="@dimen/s_dp_20"
+                android:text="@string/name"
+                android:textColor="@color/black_FF4B5F75"
+                android:textSize="@dimen/s_dp_14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/line" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/ed_item1_input"
+                android:layout_width="@dimen/s_dp_262"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/s_dp_8"
+                android:background="@drawable/shape_edit_white"
+                android:hint="@string/please_enter_web_camera_name"
+                android:maxLength="50"
+                android:paddingStart="@dimen/s_dp_8"
+                android:paddingTop="@dimen/s_dp_4"
+                android:paddingEnd="@dimen/s_dp_8"
+                android:paddingBottom="@dimen/s_dp_4"
+                android:textColor="@color/black_FF131922"
+                android:textSize="@dimen/s_dp_12"
+                app:layout_constraintBottom_toBottomOf="@id/txt_item1_name"
+                app:layout_constraintStart_toEndOf="@id/txt_item1_name"
+                app:layout_constraintTop_toTopOf="@id/txt_item1_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_item2_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_dp_28"
+                android:text="@string/stream_address"
+                android:textColor="@color/black_FF4B5F75"
+                android:textSize="@dimen/s_dp_14"
+                app:layout_constraintEnd_toEndOf="@id/txt_item1_name"
+                app:layout_constraintTop_toBottomOf="@id/txt_item1_name" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/ed_item2_input"
+                android:layout_width="@dimen/s_dp_262"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/s_dp_8"
+                android:background="@drawable/shape_edit_white"
+                android:hint="@string/please_enter_web_camera_address"
+                android:paddingStart="@dimen/s_dp_8"
+                android:paddingTop="@dimen/s_dp_4"
+                android:paddingEnd="@dimen/s_dp_8"
+                android:paddingBottom="@dimen/s_dp_4"
+                android:textColor="@color/black_FF131922"
+                android:textSize="@dimen/s_dp_12"
+                app:layout_constraintBottom_toBottomOf="@id/txt_item2_name"
+                app:layout_constraintStart_toEndOf="@id/txt_item2_name"
+                app:layout_constraintTop_toTopOf="@id/txt_item2_name" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_cancel"
+                android:layout_width="@dimen/s_dp_80"
+                android:layout_height="@dimen/s_dp_32"
+                android:layout_marginEnd="@dimen/s_dp_12"
+                android:background="@drawable/shape_btn_white"
+                android:text="@string/cancel"
+                android:textColor="@color/white_FF6C869F"
+                android:textSize="@dimen/s_dp_14"
+                app:layout_constraintBottom_toBottomOf="@id/btn_confirm"
+                app:layout_constraintEnd_toStartOf="@id/btn_confirm"
+                app:layout_constraintTop_toTopOf="@id/btn_confirm" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_confirm"
+                android:layout_width="@dimen/s_dp_80"
+                android:layout_height="@dimen/s_dp_32"
+                android:layout_marginEnd="@dimen/s_dp_24"
+                android:layout_marginBottom="@dimen/s_dp_24"
+                android:background="@drawable/sel_btn_blue_primary"
+                android:text="@string/confirm"
+                android:textColor="@color/white"
+                android:textSize="@dimen/s_dp_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

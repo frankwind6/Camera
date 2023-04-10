@@ -1,6 +1,31 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version '7.4.1' apply false
-    id 'com.android.library' version '7.4.1' apply false
+    id 'com.android.application' version '7.4.2' apply false
+    id 'com.android.library' version '7.4.2' apply false
     id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+}
+apply from: "config.gradle"
+
+ext {
+    kotlin_version = rootProject.ext.versions.ktx_version
+}
+
+//allprojects {
+//    repositories {
+//        google()
+//        jcenter()
+//        maven {
+//            allowInsecureProtocol true
+//            credentials {
+//                username "admin"
+//                password "admin_nexus"
+//                maven { url 'https://jitpack.io' }
+//            }
+//            url "http://10.214.20.42:8090/repository/maven-public/"
+//        }
+//    }
+//}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
