@@ -26,7 +26,7 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fjk.camera.R;
-import com.h3c.h3ccamera.utils.Utils;
+import com.fjk.camera.utils.Utils;
 
 import java.util.LinkedList;
 import java.util.List;

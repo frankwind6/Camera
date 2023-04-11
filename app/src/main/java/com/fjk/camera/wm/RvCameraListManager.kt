@@ -144,14 +144,19 @@ class RvCameraListManager(
      * 修改摄像头信息
      */
     private fun modifyCamera(item: CameraItem) {
+        //更新到数据库
         updateNetCamera(item)
-
+        //刷新RV
         val itemArrayList = _cameraAdapter.getData()
         val index = getItemIndex(itemArrayList, item.singId)
         if (index != -1) {
             itemArrayList[index] = item
             _cameraAdapter.setData(itemArrayList)
             _cameraAdapter.notifyItemChanged(index)
+        }
+        //正在使用则重新加载流数据
+        if (item.isSelected) {
+            showRtspView(item)
         }
     }
 
@@ -183,32 +188,11 @@ class RvCameraListManager(
         Log.d(MainActivity.TAG, "click: =====收到点击事件")
         _currentCameraType = when (item.type) {
             CameraType.NET -> {
-                hideTakePhotoLayout()
-                Log.e(MainActivity.TAG, "click: 显示网络摄像头")
-                _usbCameraTaskMaster.release()
-                binding.nodePlayerView.visibility = View.VISIBLE
-                binding.previewView.visibility = View.INVISIBLE
-                val validateRtspUrlFormat = URLUtil.validateRtspUrlFormat(item.netUrl)
-//                val rtspCanConnect = URLUtil.isRtspStreamAvailable(item.netUrl)
-                if (validateRtspUrlFormat) {
-                    hideTipCmNotConnect()
-                    _netCameraTaskMaster.showNetCameraView(item.netUrl)
-                } else {
-                    showTipCmNotConnect()
-                }
-                Log.i("fjk", "click: rtsp地址格式对否： $validateRtspUrlFormat  ")
+                showRtspView(item)
                 CameraType.NET
             }
             CameraType.USB -> {
-                showTakePhotoLayout()
-                Log.i(MainActivity.TAG, "click: 显示USB摄像头")
-                hideTipCmNotConnect()
-                _netCameraTaskMaster.release()
-                binding.nodePlayerView.visibility = View.INVISIBLE
-                binding.previewView.visibility = View.VISIBLE
-                if (!_usbCameraTaskMaster._mRunning) {
-                    _usbCameraTaskMaster.bindPreview(item.usbId)
-                }
+                showUsbCameraView(item)
                 CameraType.USB
             }
             else -> {
@@ -217,12 +201,43 @@ class RvCameraListManager(
         }
     }
 
+    private fun showRtspView(item: CameraItem) {
+        Log.e(MainActivity.TAG, "click: 显示网络摄像头")
+        release()
+
+        hideTakePhotoLayout()
+        binding.nodePlayerView.visibility = View.VISIBLE
+        binding.previewView.visibility = View.INVISIBLE
+        val validateRtspUrlFormat = URLUtil.validateRtspUrlFormat(item.netUrl)
+        if (validateRtspUrlFormat) {
+            hideTipCmNotConnect()
+            _netCameraTaskMaster.showNetCameraView(item.netUrl)
+        } else {
+            showTipCmNotConnect()
+        }
+        Log.i("fjk", "click: rtsp地址格式对否： $validateRtspUrlFormat  ")
+    }
+
+    private fun showUsbCameraView(item: CameraItem) {
+        Log.i(MainActivity.TAG, "click: 显示USB摄像头")
+        release()
+
+        showTakePhotoLayout()
+        hideTipCmNotConnect()
+        binding.nodePlayerView.visibility = View.INVISIBLE
+        binding.previewView.visibility = View.VISIBLE
+        _usbCameraTaskMaster.bindPreview(item.usbId)
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun notifyUsbCameraData() {
         _cameraAdapter.setData(intData())
         _cameraAdapter.notifyDataSetChanged()
         updateRvLayoutHeight()
+    }
+
+    fun updateRvView() {
+        _cameraAdapter.notifyDataSetChanged()
     }
 
     /**

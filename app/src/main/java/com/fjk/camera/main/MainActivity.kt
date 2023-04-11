@@ -12,6 +12,7 @@ import android.os.*
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.fjk.camera.databinding.ActivityMainBinding
@@ -20,11 +21,12 @@ import com.fjk.camera.room.NetCameraDao
 import com.fjk.camera.wm.RvCameraListManager
 
 
+
 class MainActivity : AppCompatActivity(), Handler.Callback {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
     private var mBroadcastReceiver: BroadcastReceiver? = null
-    private lateinit var controller: RvCameraListManager
+    private var controller: RvCameraListManager? = null
 
     //创建dao接口
     private lateinit var netCameraDao: NetCameraDao
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         registerBroadcastReceiver()
-
+        Log.d(TAG, "onCreate: ======")
         //数据库管理
         netCameraDao = AppDatabase.getDatabase(this).netCameraDao()
 
@@ -83,6 +85,12 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
             }
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onWindowAttributesChanged(params: WindowManager.LayoutParams?) {
+        super.onWindowAttributesChanged(params)
+        Log.d("fjk", "onWindowAttributesChanged: ====窗口配置变化")
+        controller?.updateRvView()
     }
 
     //注册监听Usb设备插拔广播
@@ -160,16 +168,18 @@ class MainActivity : AppCompatActivity(), Handler.Callback {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        controller.release()
-        unregisterBroadcastReceiver()
-    }
 
     override fun handleMessage(msg: Message): Boolean {
         when (msg.what) {
-            MSG_NOTIFY_DATA -> controller.notifyUsbCameraData()
+            MSG_NOTIFY_DATA -> controller?.notifyUsbCameraData()
         }
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ==========")
+        controller?.release()
+        unregisterBroadcastReceiver()
     }
 }
